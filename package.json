@@ -1,0 +1,14 @@
+{
+  "name": "todo-app",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm --workspace apps/api run dev",
+    "dev:web": "npm --workspace apps/web run dev"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.20.0"
+  }
+}
