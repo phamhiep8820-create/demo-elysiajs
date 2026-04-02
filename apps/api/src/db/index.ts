@@ -1,10 +1,11 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
-import { env } from "../lib/env";
-import * as schema from "./schema";
+import { drizzle } from "drizzle-orm/node-postgres"
+import pg from "pg"
+
+import { env } from "../lib/env"
+import * as schema from "./schema"
 
 const pool = new pg.Pool({
-  connectionString: env.DATABASE_URL
-});
+  connectionString: env.DATABASE_URL,
+})
 
-export const db = drizzle(pool, { schema, casing: 'snake_case' });
+export const db = drizzle(pool, { schema, casing: "snake_case" })

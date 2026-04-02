@@ -72,13 +72,8 @@
       "@/public/*": ["./public/*"],
       "@workspace/shared-education/*": ["../shared-education/src/*"]
     },
-    "types": ["node"],
+    "types": ["node"]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "src/_app"]
 }

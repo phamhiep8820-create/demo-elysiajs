@@ -1,24 +1,24 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
 export function TodoForm() {
-  const [title, setTitle] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [title, setTitle] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+    e.preventDefault()
 
-    setError("");
+    setError("")
 
     if (!title.trim()) {
-      setError("Vui lòng nhập tiêu đề todo");
-      return;
+      setError("Vui lòng nhập tiêu đề todo")
+      return
     }
 
     try {
-      setLoading(true);
+      setLoading(true)
 
       const res = await fetch("http://localhost:3001/todos/", {
         method: "POST",
@@ -26,41 +26,38 @@ export function TodoForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ title }),
-      });
+      })
 
-      const data = await res.json().catch(() => null);
+      const data = await res.json().catch(() => null)
 
       if (!res.ok) {
-        setError(data?.message || data?.error || "Tạo todo thất bại");
-        return;
+        setError(data?.message || data?.error || "Tạo todo thất bại")
+        return
       }
 
-      setTitle("");
-      setError("");
-      window.location.reload();
+      setTitle("")
+      setError("")
+      window.location.reload()
     } catch (error) {
-      console.error(error);
-      setError("Không kết nối được tới server");
+      console.error(error)
+      setError("Không kết nối được tới server")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-2"
-    >
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
       <div className="flex flex-col gap-3 sm:flex-row">
         <input
           type="text"
           value={title}
           onChange={(e) => {
-            setTitle(e.target.value);
-            if (error) setError("");
+            setTitle(e.target.value)
+            if (error) setError("")
           }}
           placeholder="Nhập tiêu đề todo..."
-          className={`h-12 flex-1 rounded-2xl border bg-white px-4 text-sm outline-none transition ${
+          className={`h-12 flex-1 rounded-2xl border bg-white px-4 text-sm transition outline-none ${
             error
               ? "border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-100"
               : "border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
@@ -76,9 +73,7 @@ export function TodoForm() {
         </button>
       </div>
 
-      {error && (
-        <p className="pl-1 text-sm text-red-600">{error}</p>
-      )}
+      {error && <p className="pl-1 text-sm text-red-600">{error}</p>}
     </form>
-  );
+  )
 }

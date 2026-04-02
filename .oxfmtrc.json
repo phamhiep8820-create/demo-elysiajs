@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": false,
+  "trailingComma": "all",
+  "ignorePatterns": ["dist/**", "*.min.js", "**/node_modules/**"],
+  "sortImports": {
+    "customGroups": [
+      { "groupName": "repo", "elementNamePattern": ["@workspace/**"] },
+      { "groupName": "internal-test", "elementNamePattern": ["@/**"] }
+    ],
+    "groups": [
+      "type-import",
+      ["value-builtin", "value-external"],
+      "repo",
+      "type-internal",
+      ["value-internal"],
+      ["type-parent", "type-sibling", "type-index"],
+      ["value-parent", "value-sibling", "value-index"],
+      "unknown"
+    ]
+  },
+  "sortPackageJson": { "sortScripts": true },
+  "sortTailwindcss": { "functions": ["clsx", "cn", "cva"] }
+}

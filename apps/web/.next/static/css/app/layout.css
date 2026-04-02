@@ -257,9 +257,6 @@
   .grid {
     display: grid;
   }
-  .inline-block {
-    display: inline-block;
-  }
   .inline-flex {
     display: inline-flex;
   }
@@ -868,6 +865,4 @@
     }
   }
 }
-
-
 

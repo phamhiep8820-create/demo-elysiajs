@@ -1,22 +1,22 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
 type Todo = {
-  id: number;
-  title: string;
-  completed: boolean;
-};
+  id: number
+  title: string
+  completed: boolean
+}
 
 export function TodoItem({ todo }: { todo: Todo }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [title, setTitle] = useState(todo.title);
-  const [loading, setLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [title, setTitle] = useState(todo.title)
+  const [loading, setLoading] = useState(false)
 
   async function toggleCompleted() {
     try {
-      setLoading(true);
+      setLoading(true)
 
       const res = await fetch(`http://localhost:3001/todos/${todo.id}`, {
         method: "PATCH",
@@ -26,24 +26,24 @@ export function TodoItem({ todo }: { todo: Todo }) {
         body: JSON.stringify({
           completed: !todo.completed,
         }),
-      });
+      })
 
-      if (!res.ok) throw new Error("Update failed");
+      if (!res.ok) throw new Error("Update failed")
 
-      window.location.reload();
+      window.location.reload()
     } catch (error) {
-      console.error(error);
-      alert("Không cập nhật được trạng thái");
+      console.error(error)
+      alert("Không cập nhật được trạng thái")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   async function saveEdit() {
-    if (!title.trim()) return;
+    if (!title.trim()) return
 
     try {
-      setLoading(true);
+      setLoading(true)
 
       const res = await fetch(`http://localhost:3001/todos/${todo.id}`, {
         method: "PATCH",
@@ -53,37 +53,37 @@ export function TodoItem({ todo }: { todo: Todo }) {
         body: JSON.stringify({
           title,
         }),
-      });
+      })
 
-      if (!res.ok) throw new Error("Edit failed");
+      if (!res.ok) throw new Error("Edit failed")
 
-      setIsEditing(false);
-      window.location.reload();
+      setIsEditing(false)
+      window.location.reload()
     } catch (error) {
-      console.error(error);
-      alert("Không sửa được todo");
+      console.error(error)
+      alert("Không sửa được todo")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   async function confirmDelete() {
     try {
-      setLoading(true);
+      setLoading(true)
 
       const res = await fetch(`http://localhost:3001/todos/${todo.id}`, {
         method: "DELETE",
-      });
+      })
 
-      if (!res.ok) throw new Error("Delete failed");
+      if (!res.ok) throw new Error("Delete failed")
 
-      setShowDeleteModal(false);
-      window.location.reload();
+      setShowDeleteModal(false)
+      window.location.reload()
     } catch (error) {
-      console.error(error);
-      alert("Không xóa được todo");
+      console.error(error)
+      alert("Không xóa được todo")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
@@ -101,9 +101,7 @@ export function TodoItem({ todo }: { todo: Todo }) {
 
           <span
             className={`inline-flex min-w-[80px] justify-center rounded-full px-3 py-1 text-xs font-semibold ${
-              todo.completed
-                ? "bg-emerald-100 text-emerald-700"
-                : "bg-amber-100 text-amber-700"
+              todo.completed ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"
             }`}
           >
             {todo.completed ? "Done" : "Pending"}
@@ -118,9 +116,7 @@ export function TodoItem({ todo }: { todo: Todo }) {
           ) : (
             <span
               className={`truncate text-sm font-medium ${
-                todo.completed
-                  ? "text-slate-400 line-through"
-                  : "text-slate-800"
+                todo.completed ? "text-slate-400 line-through" : "text-slate-800"
               }`}
             >
               {todo.title}
@@ -141,8 +137,8 @@ export function TodoItem({ todo }: { todo: Todo }) {
 
               <button
                 onClick={() => {
-                  setIsEditing(false);
-                  setTitle(todo.title);
+                  setIsEditing(false)
+                  setTitle(todo.title)
                 }}
                 disabled={loading}
                 className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 disabled:opacity-60"
@@ -180,10 +176,7 @@ export function TodoItem({ todo }: { todo: Todo }) {
             <h3 className="text-xl font-bold text-slate-900">Xác nhận xóa</h3>
             <p className="mt-3 text-sm leading-6 text-slate-600">
               Bạn có chắc muốn xóa todo{" "}
-              <span className="font-semibold text-slate-900">
-                "{todo.title}"
-              </span>{" "}
-              không?
+              <span className="font-semibold text-slate-900">"{todo.title}"</span> không?
             </p>
 
             <div className="mt-6 flex justify-end gap-3">
@@ -207,5 +200,5 @@ export function TodoItem({ todo }: { todo: Todo }) {
         </div>
       )}
     </>
-  );
+  )
 }
