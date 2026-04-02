@@ -1,6 +1,5 @@
 import {
   boolean,
-  integer,
   pgTable,
   serial,
   text,
@@ -11,8 +10,8 @@ export const todos = pgTable("todos", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   completed: boolean("completed").notNull().default(false),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull()
+  createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
 });
 
 export type Todo = typeof todos.$inferSelect;

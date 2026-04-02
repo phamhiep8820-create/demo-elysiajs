@@ -7,4 +7,4 @@ const pool = new pg.Pool({
   connectionString: env.DATABASE_URL
 });
 
-export const db = drizzle(pool, { schema });
+export const db = drizzle(pool, { schema, casing: 'snake_case' });

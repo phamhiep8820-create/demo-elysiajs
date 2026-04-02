@@ -1,52 +1,12 @@
-// import { Elysia } from "elysia";
-// import { cors } from "@elysiajs/cors";
-// import { env } from "./lib/env";
-// import { todoRoutes } from "./routes/todos";
-
-// const app = new Elysia()
-//   .use(
-//     cors({
-//       origin: true,
-//       credentials: true
-//     })
-//   )
-//   .get("/", () => ({ message: "Todo API is running" }))
-//   .use(todoRoutes)
-//   .listen(env.PORT);
-
-// console.log(`API running at http://localhost:${env.PORT}`);
-
-// import { Elysia } from "elysia";
-// import { cors } from "@elysiajs/cors";
-// import { node } from "@elysiajs/node";
-// import { env } from "./lib/env";
-// import { todoRoutes } from "./routes/todos";
-
-// const app = new Elysia({
-//   adapter: node()
-// })
-//   .use(
-//     cors({
-//       origin: true,
-//       credentials: true
-//     })
-//   )
-//   .get("/", () => ({ message: "Todo API is running" }))
-//   .use(todoRoutes)
-//   .listen(env.PORT);
-
-// console.log(`API running at http://localhost:${env.PORT}`);
-
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
-import { node } from "@elysiajs/node";
 import { openapi } from "@elysiajs/openapi";
 import { env } from "./lib/env";
-import { todoRoutes } from "./routes/todos";
+import { todoController } from "./modules/todos/todo.controller";
+import { z } from "zod";
 
-const app = new Elysia({
-  adapter: node()
-})
+
+const app =new Elysia()
   .use(
     cors({
       origin: true,
@@ -55,6 +15,10 @@ const app = new Elysia({
   )
   .use(
     openapi({
+        mapJsonSchema: {
+                zod: (schema: unknown) =>
+                  z.toJSONSchema(schema as z.ZodType, { io: "input", unrepresentable: "any" }),
+              },
       documentation: {
         info: {
           title: "Todo API",
@@ -71,7 +35,7 @@ const app = new Elysia({
     })
   )
   .get("/", () => ({ message: "Todo API is running" }))
-  .use(todoRoutes)
+  .use(todoController)
   .listen(env.PORT);
 
 console.log(`API running at http://localhost:${env.PORT}`);

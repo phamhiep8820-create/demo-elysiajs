@@ -5,10 +5,22 @@
     "apps/*"
   ],
   "scripts": {
-    "dev:api": "npm --workspace apps/api run dev",
-    "dev:web": "npm --workspace apps/web run dev"
+    "dev:api": "bun --filter api dev",
+    "dev:web": "bun --filter web dev",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "devDependencies": {
-    "@types/pg": "^8.20.0"
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "^25.5.0",
+    "@types/pg": "^8.20.0",
+    "oxlint": "^1.58.0",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.2"
+  },
+  "dependencies": {
+    "@elysiajs/openapi": "^1.4.14",
+    "elysia": "^1.4.28",
+    "zod": "^4.3.6"
   }
 }
