@@ -15,7 +15,7 @@ export default async function HomePage() {
         <div className="mb-6">
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Todo App</h1>
           <p className="mt-2 text-sm text-slate-500">
-            Quản lý công việc hằng ngày với Next.js + Elysia
+            Quản lý công việc hằng ngày
           </p>
         </div>
 
